@@ -1,11 +1,13 @@
 function thicknesses = Read_thicknesses_JM()
 % Calculates thicknesses for cartilage plugs semiautomatically, (c) Janne Mäkelä
 % For Seniors February, 2017
+% Source: https://github.com/jtamakela/thicknesses_of_plugs_from_dicom
 
 clear all, close all,% clc 
 
 %window = 20; %For rectangles
 r = 10; %Radius of the mask
+% Tresholds that define the cartilage
 lowtres = 1000;
 hitres = 9000;
 
