@@ -86,6 +86,7 @@ imshow(imadjust(dicoms_mean));
 %xcoord = [508 707 644 356 135];
 %ycoord = [161 350 641 713 504];
 
+% Pick points using mouse
 [xcoord ycoord] = ginput(6);
 xcoord = round(xcoord);
 ycoord = round(ycoord);
@@ -101,7 +102,7 @@ dicom_slider(Dicoms)
 % dicoms = dir('*.DCM*');
 % for i = 1:length(dicoms);
 %     test= Dicoms(:,:,i);
-%     %test(test<-15000) = NaN; %Suotimia
+%     %test(test<-15000) = NaN; %Filters
 %     %test(test>30000) = NaN;
 %     
 %     % If there aren't values other than cartilage 
@@ -140,6 +141,7 @@ dicom_slider(Dicoms)
 %Clockwise from noon:
 window2 = 50;
 
+%Measurement locations
 xcoord_alt = [xcoord xcoord xcoord+window2 xcoord+window2 xcoord+window2 xcoord xcoord-window2 xcoord-window2 xcoord-window2];
 ycoord_alt = [ycoord ycoord+window2 ycoord+window2 ycoord ycoord-window2 ycoord-window2 ycoord-window2 ycoord ycoord+window2];
 
@@ -170,7 +172,7 @@ for i = 1:length(dicomnames);
         end
     end
 
-    % keke(:,:,i) = test; %For figures %VOI KÄÄYTTÄÄ MYÖHEMMIN
+    % keke(:,:,i) = test; %For figures 
     
 end
 
