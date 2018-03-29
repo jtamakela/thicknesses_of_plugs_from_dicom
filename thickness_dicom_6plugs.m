@@ -1,7 +1,13 @@
 function thicknesses = Read_thicknesses_JM()
 % Calculates thicknesses for cartilage plugs semiautomatically, (c) Janne Mäkelä
+% Takes an average from 9 points around chosen point
 % For Seniors February, 2017
 % Source: https://github.com/jtamakela/thicknesses_of_plugs_from_dicom
+% Assumes 36 um slice thickness (e.g. Controlfile 65 at ChaCha)
+
+% 1. Select folder, where the DICOMs are
+% 2. Pick center 6 times
+% 3. Enjoy results
 
 clear all, close all,% clc 
 
@@ -75,6 +81,7 @@ end
 dicoms_mean = median(cat(3, Dicoms(:,:,round(end/2)), Dicoms(:,:,end)),3 );
 figure(99); 
 imshow(imadjust(dicoms_mean));
+title(['Click the centers of plugs']);
 
 % % % % % % % % % slider_question = menu('Do you need to use slider:','1) No','2) Yes');
 
