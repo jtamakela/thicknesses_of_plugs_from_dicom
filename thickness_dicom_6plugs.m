@@ -2,12 +2,15 @@ function thicknesses = Read_thicknesses_JM()
 % Calculates thicknesses for cartilage plugs semiautomatically, (c) Janne Mäkelä
 % Takes an average from 9 points around chosen point
 % For Seniors February, 2017
-% Source: https://github.com/jtamakela/thicknesses_of_plugs_from_dicom
+% Latest Version: https://github.com/jtamakela/thicknesses_of_plugs_from_dicom
+
+
 % Assumes 36 um slice thickness (e.g. Controlfile 65 at ChaCha)
 
-% 1. Select folder, where the DICOMs are
-% 2. Pick center 6 times
-% 3. Enjoy results
+% 1. Run
+% 2. Select folder, where the DICOMs are
+% 3. Pick center 6 times
+% 4. Enjoy results
 
 clear all, close all,% clc 
 
@@ -25,7 +28,9 @@ thicknesses = Read_dicoms(r,lowtres,hitres); %Actual function for the calculatio
 % %% %% %% %% %% 
 
 % % %%%%%%%%%%%%%%%%%%
-% % Here we read all the folders
+% % Uncomment all the following before 'function thickness_mean' 
+% % if you want to run through multiple measurements/folders
+% 
 % list = dir;
 % k=1;
 % for i = 3:length(list);
@@ -36,7 +41,8 @@ thicknesses = Read_dicoms(r,lowtres,hitres); %Actual function for the calculatio
 % end
 % 
 % % %%%%%%%%%%%%%%%%%%%%%
-% % Load dicom slices
+% % Waitbars to keep track of progress
+% % Not much need in normal measurements
 % 
 % %h = waitbar(0,'Please wait...');
 % for folder_i = 1:length(folders);
@@ -83,15 +89,17 @@ figure(99);
 imshow(imadjust(dicoms_mean));
 title(['Click the centers of plugs']);
 
-% % % % % % % % % slider_question = menu('Do you need to use slider:','1) No','2) Yes');
+% % % % Uncomment the following if you need to browse through slides before picking points
+% % slider_question = menu('Do you need to use slider:','1) No','2) Yes');
 
-% % % % % % % % % if slider_question == 2;
-% % % % % % % % %     close(figure(99))
-% % % % % % % % %     dicom_slider(Dicoms)
-% % % % % % % % %     pause;
-% % % % % % % % % end
+% % if slider_question == 2;
+% %     close(figure(99))
+% %     dicom_slider(Dicoms)
+% %     pause;
+% % end
 
-% Centres of plugs
+
+% The usual centres of plugs
 %xcoord = [508 707 644 356 135];
 %ycoord = [161 350 641 713 504];
 
@@ -197,6 +205,9 @@ end
 figure;
 plot(mean(light_alt,3));
 legend('1', '2', '3', '4', '5', '6', 'Location', 'NW'); 
+title('Plug Profiles');
+ylabel('Pixel value');
+xlabel('Depth (px)');
 
 
 thickness_mean = mean(thickness_alt,2);
